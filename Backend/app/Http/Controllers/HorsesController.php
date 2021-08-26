@@ -35,6 +35,8 @@ class HorsesController extends Controller
      */
     public function store(Request $request)
     {
+        //Afin d'éviter de faire trop de requete du frontend vers le backend nous en effectuons qu'une seule en envoyant tous sous forme de tableaux.
+        //Puis pour insérer en base de donnée nous insérons les éléments du tableaux 1 par 1
         $HorsesArray = $request->input('horses');
         foreach ($HorsesArray as $horse){
             horses::create([
@@ -53,24 +55,8 @@ class HorsesController extends Controller
         }
 
         return response()->json([
-                'message'=> 'OK']);
+                'message'=> 'OK'], 201);
                 
-        // return response()->json([
-        //     'message'=> 'OK',
-        //     "data"=> horses::create([
-        //         'horse_nom' => $request->input('horse_nom'),
-        //         'horse_cle' => $request->input('horse_cle'),
-        //         'horse_sire' => $request->input('horse_sire'),
-        //         'horse_race' => $request->input('horse_race'),
-        //         'horse_robe' => $request->input('horse_robe'),
-        //         'horse_sexe' => $request->input('horse_sexe'),
-        //         'horse_country' => $request->input('horse_country'),
-        //         'horse_taille' => $request->input('horse_taille'),
-        //         'horse_datenaissance' => $request->input('horse_datenaissance'),
-        //         'horse_pere' => $request->input('horse_pere'),
-        //         'horse_mere' => $request->input('horse_mere')
-        //     ])
-        // ], 201);
     }
 
     /**
