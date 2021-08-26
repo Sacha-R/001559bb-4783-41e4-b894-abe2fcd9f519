@@ -72,9 +72,12 @@
       </v-dialog>
     </v-card-title>
     <!-- Composant vuetify permettant l'affichage du tableau-->
+    <!-- L'affichage en bas de tableau du nombre de chevaux par page et nombre de page n'a pas été désactivé meme si non demandé car
+     combiné a la barre de recherche j'ai trouver cela plus intuitif et facile a utilisé. -->
     <v-data-table :headers="headers" :items="ComputedHorses" :search="search">
       <!-- v-slot Permet de mettre un lien sur le nom du cheval qui emmene sur la fiche du cheval -->
-      <!-- Le SIRE étant l'unique identifiant unique dont dispose les chevaux, je me suis basé dessus pour créer la fiche cheval. Cependant ceux ne disposant pas de SIRE non donc pas de fiche cheval.
+      <!-- Le SIRE étant l'unique identifiant unique dont dispose les chevaux, je me suis basé dessus pour créer la fiche cheval.
+      Cependant ceux ne disposant pas de SIRE non donc pas de fiche cheval.
       Pour remédier a ca nous devrons dans le futur utiliser des uuid afin d'identifier tout les chevaux et pouvoir ainsi crée une fiche pour chacun. -->
 
       <!-- eslint-disable-next-line -->
@@ -87,7 +90,8 @@
         </a>
       </template>
     </v-data-table>
-    <!-- Envoie de tout les chevaux présent en BDD. Encore une fois les chevaux ne disposant pas de uuid et certain étant en doublon nous ne pouvons pas gérer le fait de n'ajouter qu'une seule fois chaque cheval a la BDD.
+    <!-- Envoie de tout les chevaux présent en BDD. Encore une fois les chevaux ne disposant pas de uuid et certain étant en doublon
+    nous ne pouvons pas gérer le fait de n'ajouter qu'une seule fois chaque cheval a la BDD.
     Chaque appuie sur le bouton ajouteras l'ensemble des chevaux a la BDD. -->
     <v-btn @click="AddHorsesToBDD(horses)" color="#444" class="ml-6 mb-6"
       >Ajouter les chevaux a la base de données</v-btn
