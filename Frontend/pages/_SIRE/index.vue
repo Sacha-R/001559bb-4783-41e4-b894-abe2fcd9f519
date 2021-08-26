@@ -15,6 +15,7 @@
       </v-row>
     </v-card-title>
     <v-divider class="ma-6"></v-divider>
+    <!-- Affichage des données correspondant au cheval séléctionner -->
     <v-card class="ma-6" flat>
       <v-row>
         <v-col cols="6">
@@ -91,6 +92,7 @@
 export default {
   data() {
     return {
+      // Ici les données en dur fournis au début de l'exercice
       horses: [
         {
           horse_nom: 'ULANIA TOURNERIE',
@@ -2102,6 +2104,8 @@ export default {
     }
   },
   computed: {
+    //Permet en foncton du numéros de SIRE du cheval de sélectionner dans le tableaux horses uniquement le cheval concerné par la fiche
+    //Permet l'affichage correcte de la race, du sexe et de la robe du cheval
     Horse() {
       const SIRE = this.$route.params.SIRE
       let objHorse = {}

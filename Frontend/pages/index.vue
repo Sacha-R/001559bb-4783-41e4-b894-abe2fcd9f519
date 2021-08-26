@@ -3,6 +3,7 @@
     <v-card-title>
       Liste des chevaux
       <v-spacer></v-spacer>
+      <!-- Barre de recherche sur tout les champs -->
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
@@ -11,6 +12,7 @@
         hide-details
       ></v-text-field>
       <v-spacer></v-spacer>
+      <!-- Boite de dialogue s'affichant lors de l'ajout d'un nouveau cheval -->
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
@@ -69,7 +71,12 @@
         </v-card>
       </v-dialog>
     </v-card-title>
+    <!-- Composant vuetify permettant l'affichage du tableau-->
     <v-data-table :headers="headers" :items="ComputedHorses" :search="search">
+      <!-- v-slot Permet de mettre un lien sur le nom du cheval qui emmene sur la fiche du cheval -->
+      <!-- Le SIRE étant l'unique identifiant unique dont dispose les chevaux, je me suis basé dessus pour créer la fiche cheval. Cependant ceux ne disposant pas de SIRE non donc pas de fiche cheval.
+      Pour remédier a ca nous devrons dans le futur utiliser des uuid afin d'identifier tout les chevaux et pouvoir ainsi crée une fiche pour chacun. -->
+
       <!-- eslint-disable-next-line -->
       <template v-slot:item.horse_nom="{ item }">
         <a
@@ -80,6 +87,8 @@
         </a>
       </template>
     </v-data-table>
+    <!-- Envoie de tout les chevaux présent en BDD. Encore une fois les chevaux ne disposant pas de uuid et certain étant en doublon nous ne pouvons pas gérer le fait de n'ajouter qu'une seule fois chaque cheval a la BDD.
+    Chaque appuie sur le bouton ajouteras l'ensemble des chevaux a la BDD. -->
     <v-btn @click="AddHorsesToBDD(horses)" color="#444" class="ml-6 mb-6"
       >Ajouter les chevaux a la base de données</v-btn
     >
@@ -91,6 +100,7 @@ export default {
   data() {
     return {
       dialog: false,
+      // Ici les données en dur fournis au début de l'exercice
       horses: [
         {
           horse_nom: 'ULANIA TOURNERIE',
@@ -2099,6 +2109,7 @@ export default {
           robe_label: 'INCONNUE',
         },
       ],
+      // Permet de définir le nom des colonnes du tableau
       headers: [
         {
           text: 'Nom',
@@ -2129,18 +2140,19 @@ export default {
         horse_pere: '',
         horse_mere: '',
       },
-      comments: '',
     }
   },
   methods: {
     save() {
+      // Ajout du cheval dans le tableau d'objet horses
       this.horses.push(this.NewItem)
-
+      // Ajout du cheval en base de donnée
       this.AddHorsesToBDD([this.NewItem])
       this.close()
     },
     close() {
       this.dialog = false
+      // Remise de l'objet NewItem au valeur par défault
       this.NewItem = {
         horse_nom: '',
         horse_sire: '',
@@ -2156,6 +2168,7 @@ export default {
       }
     },
     AddHorsesToBDD(horseArray) {
+      // Ajout d'un tableaux d'objet (de cheval) a la base de donnée
       this.$axios.post(`http://localhost:8000/api/horses`, {
         horses: horseArray,
       })
@@ -2163,6 +2176,7 @@ export default {
   },
 
   computed: {
+    // Permet l'affichage correcte de la race et de la robe dans le tableau sans pour autant impacter le tableau horses
     ComputedHorses() {
       const cloneDeep = require('lodash/clonedeep')
       const deepCopy = cloneDeep(this.horses)
@@ -2183,7 +2197,7 @@ export default {
 
       return ComputedHorses
     },
-
+    // Utiliser pour créer un tableaux de string a partir d'un tableaux d'objet afin de proposer ces choix dans le v-autocomplete
     ComputedSexe() {
       const computSexe = []
       for (const sex of this.sexe) {
@@ -2191,6 +2205,7 @@ export default {
       }
       return computSexe
     },
+    // Utiliser pour créer un tableaux de string a partir d'un tableaux d'objet afin de proposer ces choix dans le v-autocomplete
     ComputedRobe() {
       const computRobe = []
       for (const rob of this.robe) {
@@ -2198,6 +2213,7 @@ export default {
       }
       return computRobe
     },
+    // Utiliser pour créer un tableaux de string a partir d'un tableaux d'objet afin de proposer ces choix dans le v-autocomplete
     ComputedRace() {
       const computRace = []
       for (const rac of this.race) {
@@ -2206,7 +2222,5 @@ export default {
       return computRace
     },
   },
-
-  watch: {},
 }
 </script>
