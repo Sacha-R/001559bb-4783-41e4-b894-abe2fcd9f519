@@ -34,16 +34,13 @@ Liste des commandes a éxécuter avant de pouvoir lancer le projet:
 
 ## Information complementaire
 
-Temp éstimé a travailler sur le Frontend : 1h30
+    Temp éstimé a travailler sur le Frontend : 1h30
+    Temp réellement travaillé sur le Frontend: 4h00
 
-Temp réellement travaillé sur le Frontend: 4h00
+    Temp éstimé a travailler sur le Backend : 4h00
+    Temp réellement travaillé sur le Backend: 2h30
 
-Temp éstimé a travailler sur le Backend : 4h00
-
-Temp réellement travaillé sur le Backend: 2h30
-
-Temp total éstimé : 5h30
-
-Temp total réelement travaillé: 6h30
+    Temp total éstimé : 5h30
+    Temp total réelement travaillé: 6h30
 
 #### Créer par Sacha RABIN
