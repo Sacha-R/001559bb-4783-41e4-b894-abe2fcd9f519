@@ -77,7 +77,7 @@
     <v-data-table :headers="headers" :items="ComputedHorses" :search="search">
       <!-- v-slot Permet de mettre un lien sur le nom du cheval qui emmene sur la fiche du cheval -->
       <!-- L'id crée dans le computed étant l'unique identifiant unique dont dispose les chevaux, je me suis basé dessus pour créer la fiche cheval.
-      Cependant ceux qui vienne d'être crée ont un id mais pas en dur, il n'auront donc pas de fiche cheval.
+      Cependant ceux qui vienne d'être crée ont un id mais pas en dur dans le tableaux horses utiliser dans horse/_id, il n'auront donc pas de fiche cheval.
       Pour remédier a ca nous devrons dans le futur utiliser des uuid et fetch le tableau horses depuis la BDD. -->
 
       <!-- eslint-disable-next-line -->
