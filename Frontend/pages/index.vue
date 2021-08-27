@@ -76,14 +76,14 @@
      combiné a la barre de recherche j'ai trouver cela plus intuitif et facile a utilisé. -->
     <v-data-table :headers="headers" :items="ComputedHorses" :search="search">
       <!-- v-slot Permet de mettre un lien sur le nom du cheval qui emmene sur la fiche du cheval -->
-      <!-- Le SIRE étant l'unique identifiant unique dont dispose les chevaux, je me suis basé dessus pour créer la fiche cheval.
-      Cependant ceux ne disposant pas de SIRE non donc pas de fiche cheval.
-      Pour remédier a ca nous devrons dans le futur utiliser des uuid afin d'identifier tout les chevaux et pouvoir ainsi crée une fiche pour chacun. -->
+      <!-- L'id crée dans le computed étant l'unique identifiant unique dont dispose les chevaux, je me suis basé dessus pour créer la fiche cheval.
+      Cependant ceux qui vienne d'être crée ont un id mais pas en dur, il n'auront donc pas de fiche cheval.
+      Pour remédier a ca nous devrons dans le futur utiliser des uuid et fetch le tableau horses depuis la BDD. -->
 
       <!-- eslint-disable-next-line -->
       <template v-slot:item.horse_nom="{ item }">
         <a
-          :href="item.horse_sire"
+          :href="'horses/' + item.id"
           style="color: #ff456a; text-decoration: none"
         >
           {{ item.horse_nom }}
@@ -2197,6 +2197,10 @@ export default {
         }
 
         ComputedHorses.push(horse)
+      }
+
+      for (const index in ComputedHorses) {
+        ComputedHorses[index].id = parseInt(index) + 1
       }
 
       return ComputedHorses

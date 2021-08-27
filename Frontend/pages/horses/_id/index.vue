@@ -2104,16 +2104,13 @@ export default {
     }
   },
   computed: {
-    //Permet en foncton du numéros de SIRE du cheval de sélectionner dans le tableaux horses uniquement le cheval concerné par la fiche
+    //Permet en foncton de l'ID du cheval de sélectionner dans le tableaux horses uniquement le cheval concerné par la fiche
     //Permet l'affichage correcte de la race, du sexe et de la robe du cheval
     Horse() {
-      const SIRE = this.$route.params.SIRE
+      const id = this.$route.params.id
+      console.log(id)
       let objHorse = {}
-      for (const horse of this.horses) {
-        if (horse.horse_sire === SIRE) {
-          objHorse = horse
-        }
-      }
+      objHorse = this.horses[parseInt(id) - 1]
 
       const objSexe = this.sexe.find((a) => a.sexe_code === objHorse.horse_sexe)
       if (objSexe) {

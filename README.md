@@ -43,6 +43,11 @@ Liste des commandes a éxécuter avant de pouvoir lancer le projet:
     Temp total éstimé : 5h30
     Temp total réelement travaillé: 6h30
 
+
+
+    Le fait de n'avoir pas ajouté d'uuid a chaque cheval pour les rendre unique en bdd est un choix car
+    vue que cela na pas été fourni dans l'exercice je me suis dit qu'il fallait peut etre faire sans.
+
 #### Créer par Sacha RABIN
 
 #### image utilisé
